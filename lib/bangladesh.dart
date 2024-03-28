@@ -10,7 +10,7 @@ class MyBangladesh extends StatelessWidget {
         title: Text('My Bangladesh'),
       ),
       body: Container(
-        child: Image.asset('images/Nature.jpg'),
+        child: Image.asset('images/dice1.png'),
       ),
     );
   }
