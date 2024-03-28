@@ -18,10 +18,18 @@ class _MyBangladeshState extends State<MyApp> {
     'images/dice6.png',
   ];
   Random random = Random();
+  bool isLoading = false;
 
   void rollingDice() {
     setState(() {
-      currentDice = random.nextInt(_diceImages.length);
+      isLoading = true;
+    });
+
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        currentDice = random.nextInt(_diceImages.length);
+        isLoading = false;
+      });
     });
   }
 
@@ -40,7 +48,16 @@ class _MyBangladeshState extends State<MyApp> {
                 child: Image.asset(_diceImages[currentDice]),
               ),
             ),
-            ElevatedButton(onPressed: rollingDice, child: Text("Rolling"))
+            ElevatedButton(
+              onPressed: () {
+                if (!isLoading) {
+                  rollingDice();
+                }
+              },
+              child: isLoading
+                  ? CircularProgressIndicator() // Show CircularProgressIndicator when isLoading is true
+                  : Text("Rolling"),
+            )
           ],
         ),
       ),
