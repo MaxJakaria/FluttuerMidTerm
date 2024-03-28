@@ -4,12 +4,11 @@ import 'dart:math';
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
   _MyBangladeshState createState() => _MyBangladeshState();
 }
 
 class _MyBangladeshState extends State<MyApp> {
-  int _currentDiceIndex = 0;
+  int currentDice = 0;
   List<String> _diceImages = [
     'images/dice1.png',
     'images/dice2.png',
@@ -18,11 +17,11 @@ class _MyBangladeshState extends State<MyApp> {
     'images/dice5.png',
     'images/dice6.png',
   ];
-  Random _random = Random();
+  Random random = Random();
 
-  void _rollDice() {
+  void rollingDice() {
     setState(() {
-      _currentDiceIndex = _random.nextInt(_diceImages.length);
+      currentDice = random.nextInt(_diceImages.length);
     });
   }
 
@@ -36,12 +35,12 @@ class _MyBangladeshState extends State<MyApp> {
           children: [
             Center(
               child: Container(
-                height: 20,
-                width: 20,
-                child: Image.asset(_diceImages[_currentDiceIndex]),
+                height: 200,
+                width: 200,
+                child: Image.asset(_diceImages[currentDice]),
               ),
             ),
-            ElevatedButton(onPressed: _rollDice, child: Text("Rolling"))
+            ElevatedButton(onPressed: rollingDice, child: Text("Rolling"))
           ],
         ),
       ),
